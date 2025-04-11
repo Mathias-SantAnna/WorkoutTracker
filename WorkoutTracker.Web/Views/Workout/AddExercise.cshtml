@@ -1,0 +1,54 @@
+@model WorkoutTracker.Web.Models.WorkoutExercise
+
+@{
+    ViewData["Title"] = "Add Exercise to Workout";
+    var workout = ViewBag.Workout as WorkoutTracker.Web.Models.Workout;
+    var exercises = ViewBag.Exercises as List<WorkoutTracker.Web.Models.Exercise>;
+}
+
+<h1>Add Exercise to Workout</h1>
+<h4>@(workout?.Name ?? "Unknown Workout")</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="AddExercise">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="WorkoutId" />
+            <div class="form-group mb-3">
+                <label class="control-label">Exercise</label>
+                <select asp-for="ExerciseId" class="form-control">
+                    <option value="">-- Select Exercise --</option>
+                    @foreach (var exercise in exercises)
+                    {
+                        <option value="@exercise.ExerciseId">@exercise.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="ExerciseId" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Sets" class="control-label"></label>
+                <input asp-for="Sets" class="form-control" />
+                <span asp-validation-for="Sets" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Reps" class="control-label"></label>
+                <input asp-for="Reps" class="form-control" />
+                <span asp-validation-for="Reps" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="WeightLbs" class="control-label"></label>
+                <input asp-for="WeightLbs" class="form-control" />
+                <span asp-validation-for="WeightLbs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add Exercise" class="btn btn-primary" />
+                <a asp-action="Details" asp-route-id="@Model.WorkoutId" class="btn btn-secondary">Back to Workout</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

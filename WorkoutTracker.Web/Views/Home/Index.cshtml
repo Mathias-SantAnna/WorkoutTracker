@@ -3,6 +3,48 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Workout Tracker</h1>
+    <p>Track your workouts, exercises, and progress with our easy-to-use workout tracking app.</p>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Workouts</h5>
+            </div>
+            <div class="card-body">
+                <p>Manage your workout sessions, including dates, durations, and exercises performed.</p>
+                <a asp-controller="Workout" asp-action="Index" class="btn btn-outline-primary">View Workouts</a>
+                <a asp-controller="Workout" asp-action="Create" class="btn btn-primary">Add New Workout</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Exercises</h5>
+            </div>
+            <div class="card-body">
+                <p>Manage your exercise catalog, including descriptions and target muscles.</p>
+                <a asp-controller="Exercise" asp-action="Index" class="btn btn-outline-success">View Exercises</a>
+                <a asp-controller="Exercise" asp-action="Create" class="btn btn-success">Add New Exercise</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">API and Integration</h5>
+            </div>
+            <div class="card-body">
+                <p>Our API provides workout analytics and integration with other fitness applications.</p>
+                <p><strong>Popular Exercises Endpoint:</strong> <code>/api/workoutanalysis/popular</code></p>
+                <p>Use our console client application to view analytics and reports.</p>
+            </div>
+        </div>
+    </div>
 </div>

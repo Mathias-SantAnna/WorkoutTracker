@@ -1,18 +1,80 @@
-@model TModel
+@model WorkoutTracker.Web.Models.Workout
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Workout Details";
 }
 
-<!DOCTYPE html>
+<h1>Workout Details</h1>
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
 <div>
-      
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.WorkoutDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.WorkoutDate)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.DurationMinutes)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.DurationMinutes) min
+        </dd>
+    </dl>
 </div>
-</body>
-</html>
+
+<div class="mb-4">
+    <a asp-action="Edit" asp-route-id="@Model.WorkoutId" class="btn btn-warning">Edit</a>
+    <a asp-action="AddExercise" asp-route-id="@Model.WorkoutId" class="btn btn-success">Add Exercise</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@if (Model.WorkoutExercises != null && Model.WorkoutExercises.Any())
+{
+    <h3>Exercises in this Workout</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Sets</th>
+            <th>Reps</th>
+            <th>Weight (lbs)</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.WorkoutExercises)
+        {
+            <tr>
+                <td>@item.Exercise.Name</td>
+                <td>@item.Sets</td>
+                <td>@item.Reps</td>
+                <td>@(item.WeightLbs.HasValue ? item.WeightLbs.Value.ToString() : "N/A")</td>
+                <td>
+                    <a asp-controller="WorkoutExercise" asp-action="Edit" asp-route-id="@item.WorkoutExerciseId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-controller="WorkoutExercise" asp-action="Delete" asp-route-id="@item.WorkoutExerciseId" class="btn btn-sm btn-danger">Remove</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        No exercises have been added to this workout yet.
+    </div>
+}

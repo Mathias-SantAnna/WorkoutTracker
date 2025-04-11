@@ -1,101 +1,153 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WorkoutTracker.Web.Models;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace WorkoutTracker.Web.Controllers
 {
     public class ExerciseController : Controller
     {
-        private static List<Exercise> exercises = new List<Exercise>
+        private readonly ApplicationDbContext _context;
+
+        public ExerciseController(ApplicationDbContext context)
         {
-            new Exercise { 
-                ExerciseId = 1, 
-                Name = "Bench Press", 
-                Description = "Compound chest exercise", 
-                TargetMuscle = "Chest" 
-            },
-            new Exercise { 
-                ExerciseId = 2, 
-                Name = "Squat", 
-                Description = "Fundamental lower body exercise", 
-                TargetMuscle = "Quadriceps" 
-            },
-            new Exercise { 
-                ExerciseId = 3, 
-                Name = "Deadlift", 
-                Description = "Full body pulling movement", 
-                TargetMuscle = "Lower Back, Hamstrings" 
-            },
-        };
+            _context = context;
+        }
 
-        public IActionResult Index() => View(exercises);
+        // GET: Exercise
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Exercises.ToListAsync());
+        }
 
-        public IActionResult Create() => View();
+        // GET: Exercise/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var exercise = await _context.Exercises
+                .FirstOrDefaultAsync(m => m.ExerciseId == id);
+                
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+
+            return View(exercise);
+        }
+
+        // GET: Exercise/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Exercise/Create
         [HttpPost]
-        public IActionResult Create(Exercise exercise)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Name,Description,TargetMuscle")] Exercise exercise)
         {
             if (ModelState.IsValid)
             {
-                int newId = exercises.Any() ? exercises.Max(i => i.ExerciseId) + 1 : 1;
-                exercise.ExerciseId = newId;
-                exercises.Add(exercise);
-                return RedirectToAction("Index");
+                _context.Add(exercise);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(exercise);
         }
 
-        public IActionResult Edit(int id)
+        // GET: Exercise/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            var exercise = exercises.FirstOrDefault(i => i.ExerciseId == id);
-            if (exercise == null)
+            if (id == null)
+            {
                 return NotFound();
+            }
+
+            var exercise = await _context.Exercises.FindAsync(id);
+            
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+            
             return View(exercise);
         }
 
+        // POST: Exercise/Edit/5
         [HttpPost]
-        public IActionResult Edit(int id, Exercise exercise)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ExerciseId,Name,Description,TargetMuscle")] Exercise exercise)
         {
+            if (id != exercise.ExerciseId)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                var existing = exercises.FirstOrDefault(i => i.ExerciseId == id);
-                if (existing != null)
+                try
                 {
-                    existing.Name = exercise.Name;
-                    existing.Description = exercise.Description;
-                    existing.TargetMuscle = exercise.TargetMuscle;
+                    _context.Update(exercise);
+                    await _context.SaveChangesAsync();
                 }
-
-                return RedirectToAction("Index");
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ExerciseExists(exercise.ExerciseId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
             }
             return View(exercise);
         }
 
-        public IActionResult Delete(int id)
+        // GET: Exercise/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            var exercise = exercises.FirstOrDefault(i => i.ExerciseId == id);
-            if (exercise == null)
+            if (id == null)
+            {
                 return NotFound();
+            }
+
+            var exercise = await _context.Exercises
+                .FirstOrDefaultAsync(m => m.ExerciseId == id);
+                
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+
             return View(exercise);
         }
 
+        // POST: Exercise/Delete/5
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var exercise = exercises.FirstOrDefault(i => i.ExerciseId == id);
+            var exercise = await _context.Exercises.FindAsync(id);
             if (exercise != null)
-                exercises.Remove(exercise);
-
-            return RedirectToAction("Index");
+            {
+                _context.Exercises.Remove(exercise);
+                await _context.SaveChangesAsync();
+            }
+            
+            return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int id)
+        private bool ExerciseExists(int id)
         {
-            var exercise = exercises.FirstOrDefault(i => i.ExerciseId == id);
-            if (exercise == null)
-                return NotFound();
-            return View(exercise);
+            return _context.Exercises.Any(e => e.ExerciseId == id);
         }
     }
 }

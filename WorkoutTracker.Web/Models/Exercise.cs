@@ -1,9 +1,4 @@
-namespace WorkoutTracker.Web.Models;
-
-public class Exercise
-{
-    
-}using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WorkoutTracker.Web.Models
@@ -14,16 +9,16 @@ namespace WorkoutTracker.Web.Models
         
         [Required]
         [StringLength(100)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         
         [StringLength(500)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
         
         [StringLength(100)]
         [Display(Name = "Target Muscle")]
-        public string TargetMuscle { get; set; }
+        public string? TargetMuscle { get; set; }
         
         // Navigation property
-        public ICollection<WorkoutExercise> WorkoutExercises { get; set; }
+        public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
     }
 }

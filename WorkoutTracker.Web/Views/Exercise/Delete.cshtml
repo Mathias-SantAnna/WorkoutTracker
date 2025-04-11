@@ -1,18 +1,30 @@
-@model TModel
+@model WorkoutTracker.Web.Models.WorkoutExercise
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Remove Exercise from Workout";
 }
 
-<!DOCTYPE html>
+<h1>Remove Exercise from Workout</h1>
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
+<h3>Are you sure you want to remove this exercise from the workout?</h3>
 <div>
-      
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Workout</dt>
+        <dd class="col-sm-9">@Model.Workout.Name</dd>
+        <dt class="col-sm-3">Exercise</dt>
+        <dd class="col-sm-9">@Model.Exercise.Name</dd>
+        <dt class="col-sm-3">Sets</dt>
+        <dd class="col-sm-9">@Model.Sets</dd>
+        <dt class="col-sm-3">Reps</dt>
+        <dd class="col-sm-9">@Model.Reps</dd>
+        <dt class="col-sm-3">Weight (lbs)</dt>
+        <dd class="col-sm-9">@(Model.WeightLbs.HasValue ? Model.WeightLbs.Value.ToString() : "N/A")</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="WorkoutExerciseId" />
+        <input type="submit" value="Remove" class="btn btn-danger" />
+        <a asp-controller="Workout" asp-action="Details" asp-route-id="@Model.WorkoutId" class="btn btn-secondary">Back to Workout</a>
+    </form>
 </div>
-</body>
-</html>

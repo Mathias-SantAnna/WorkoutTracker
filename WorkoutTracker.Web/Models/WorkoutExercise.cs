@@ -9,11 +9,11 @@ namespace WorkoutTracker.Web.Models
         
         [ForeignKey("Workout")]
         public int WorkoutId { get; set; }
-        public Workout Workout { get; set; }
+        public Workout Workout { get; set; } = null!;
         
         [ForeignKey("Exercise")]
         public int ExerciseId { get; set; }
-        public Exercise Exercise { get; set; }
+        public Exercise Exercise { get; set; } = null!;
         
         [Range(1, 100)]
         public int Sets { get; set; }
