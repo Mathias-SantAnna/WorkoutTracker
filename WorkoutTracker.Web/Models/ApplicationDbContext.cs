@@ -15,7 +15,7 @@ namespace WorkoutTracker.Web.Models
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure the many-to-many relationship
+            // Configure the relationship
             modelBuilder.Entity<WorkoutExercise>()
                 .HasKey(we => we.WorkoutExerciseId);
                 
