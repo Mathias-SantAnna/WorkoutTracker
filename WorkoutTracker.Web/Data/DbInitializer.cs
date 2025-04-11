@@ -14,7 +14,7 @@ namespace WorkoutTracker.Web.Data
             // Look for any exercises
             if (context.Exercises.Any())
             {
-                return;   // DB has been seeded
+                return; // DB has been seeded
             }
 
             var exercises = new Exercise[]
@@ -29,117 +29,89 @@ namespace WorkoutTracker.Web.Data
                 new Exercise { Name = "Lat Pulldown", Description = "Vertical pulling movement", TargetMuscle = "Back, Biceps" }
             };
 
-            foreach (Exercise e in exercises)
-            {
-                context.Exercises.Add(e);
-            }
+            context.Exercises.AddRange(exercises);
             context.SaveChanges();
 
             var workouts = new Workout[]
             {
                 new Workout {
-                    Name = "Full Body Workout", 
-                    Description = "A comprehensive full body workout", 
-                    WorkoutDate = DateTime.Now.AddDays(-7), 
-                    DurationMinutes = 60 
+                    Name = "Full Body Workout",
+                    Description = "A comprehensive full body workout",
+                    WorkoutDate = DateTime.Now.AddDays(-7),
+                    DurationMinutes = 60
                 },
-                new Workout { 
-                    Name = "Upper Body Focus", 
-                    Description = "Targets chest, shoulders, and arms", 
-                    WorkoutDate = DateTime.Now.AddDays(-3), 
-                    DurationMinutes = 45 
+                new Workout {
+                    Name = "Upper Body Focus",
+                    Description = "Targets chest, shoulders, and arms",
+                    WorkoutDate = DateTime.Now.AddDays(-3),
+                    DurationMinutes = 45
                 },
-                new Workout { 
-                    Name = "Leg Day", 
-                    Description = "Lower body workout for strength", 
-                    WorkoutDate = DateTime.Now.AddDays(-1), 
-                    DurationMinutes = 55 
+                new Workout {
+                    Name = "Leg Day",
+                    Description = "Lower body workout for strength",
+                    WorkoutDate = DateTime.Now.AddDays(-1),
+                    DurationMinutes = 55
                 }
             };
 
-            foreach (Workout w in workouts)
-            {
-                context.Workouts.Add(w);
-            }
+            context.Workouts.AddRange(workouts);
             context.SaveChanges();
 
-            // Add some workout exercises
             var workoutExercises = new WorkoutExercise[]
             {
                 // Full Body Workout
-                new WorkoutExercise { 
-                    WorkoutId = 1, 
-                    ExerciseId = 1, // Bench Press
-                    Sets = 3, 
-                    Reps = 10, 
-                    WeightLbs = 135 
+                new WorkoutExercise {
+                    Workout = workouts[0],
+                    Exercise = exercises[0], // Bench Press
+                    Sets = 3, Reps = 10, WeightLbs = 135
                 },
-                new WorkoutExercise { 
-                    WorkoutId = 1, 
-                    ExerciseId = 2, // Squat
-                    Sets = 4, 
-                    Reps = 8, 
-                    WeightLbs = 225 
+                new WorkoutExercise {
+                    Workout = workouts[0],
+                    Exercise = exercises[1], // Squat
+                    Sets = 4, Reps = 8, WeightLbs = 225
                 },
-                new WorkoutExercise { 
-                    WorkoutId = 1, 
-                    ExerciseId = 3, // Deadlift
-                    Sets = 3, 
-                    Reps = 5, 
-                    WeightLbs = 275 
+                new WorkoutExercise {
+                    Workout = workouts[0],
+                    Exercise = exercises[2], // Deadlift
+                    Sets = 3, Reps = 5, WeightLbs = 275
                 },
-                
+
                 // Upper Body Workout
-                new WorkoutExercise { 
-                    WorkoutId = 2, 
-                    ExerciseId = 1, // Bench Press
-                    Sets = 5, 
-                    Reps = 5, 
-                    WeightLbs = 155 
+                new WorkoutExercise {
+                    Workout = workouts[1],
+                    Exercise = exercises[0], // Bench Press
+                    Sets = 5, Reps = 5, WeightLbs = 155
                 },
-                new WorkoutExercise { 
-                    WorkoutId = 2, 
-                    ExerciseId = 5, // Shoulder Press
-                    Sets = 4, 
-                    Reps = 8, 
-                    WeightLbs = 95 
+                new WorkoutExercise {
+                    Workout = workouts[1],
+                    Exercise = exercises[4], // Shoulder Press
+                    Sets = 4, Reps = 8, WeightLbs = 95
                 },
-                new WorkoutExercise { 
-                    WorkoutId = 2, 
-                    ExerciseId = 4, // Pull-Up
-                    Sets = 3, 
-                    Reps = 10, 
-                    WeightLbs = null 
+                new WorkoutExercise {
+                    Workout = workouts[1],
+                    Exercise = exercises[3], // Pull-Up
+                    Sets = 3, Reps = 10, WeightLbs = null
                 },
-                
+
                 // Leg Day
-                new WorkoutExercise { 
-                    WorkoutId = 3, 
-                    ExerciseId = 2, // Squat
-                    Sets = 5, 
-                    Reps = 5, 
-                    WeightLbs = 245 
+                new WorkoutExercise {
+                    Workout = workouts[2],
+                    Exercise = exercises[1], // Squat
+                    Sets = 5, Reps = 5, WeightLbs = 245
                 },
-                new WorkoutExercise { 
-                    WorkoutId = 3, 
-                    ExerciseId = 7, // Leg Press
-                    Sets = 3, 
-                    Reps = 12, 
-                    WeightLbs = 360 
+                new WorkoutExercise {
+                    Workout = workouts[2],
+                    Exercise = exercises[6], // Leg Press
+                    Sets = 3, Reps = 12, WeightLbs = 360
                 },
-                new WorkoutExercise { 
-                    WorkoutId = 3, 
-                    ExerciseId = 3, // Deadlift
-                    Sets = 3, 
-                    Reps = 5, 
-                    WeightLbs = 295 
+                new WorkoutExercise {
+                    Workout = workouts[2],
+                    Exercise = exercises[2], // Deadlift
+                    Sets = 3, Reps = 5, WeightLbs = 295
                 }
             };
 
-            foreach (WorkoutExercise we in workoutExercises)
-            {
-                context.WorkoutExercises.Add(we);
-            }
+            context.WorkoutExercises.AddRange(workoutExercises);
             context.SaveChanges();
         }
     }
