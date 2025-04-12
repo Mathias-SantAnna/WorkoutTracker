@@ -257,3 +257,11 @@
 /Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/obj/Release/net8.0/WorkoutTracker.Web.pdb
 /Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/obj/Release/net8.0/WorkoutTracker.Web.genruntimeconfig.cache
 /Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/obj/Release/net8.0/ref/WorkoutTracker.Web.dll
+/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/bin/Release/net8.0/WorkoutTracker.Web.staticwebassets.endpoints.json
+/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/bin/Release/net8.0/Microsoft.OpenApi.dll
+/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/bin/Release/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/bin/Release/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/bin/Release/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/obj/Release/net8.0/WorkoutTracker.Web.MvcApplicationPartsAssemblyInfo.cs
+/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/obj/Release/net8.0/staticwebassets.build.endpoints.json
+/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/obj/Release/net8.0/staticwebassets/msbuild.WorkoutTracker.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

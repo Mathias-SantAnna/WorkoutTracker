@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/obj/Release/net8.0/scopedcss/projectbundle/WorkoutTracker.Web.bundle.scp.css",
-      "PackagePath": "staticwebassets/WorkoutTracker.Web.bundle.scp.css"
+      "PackagePath": "staticwebassets/WorkoutTracker.Web.izjhssmhib.bundle.scp.css"
     },
     {
       "Id": "/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/wwwroot/css/site.css",
@@ -243,6 +243,10 @@
     {
       "Id": "/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.WorkoutTracker.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj/Release/net8.0/staticwebassets/msbuild.WorkoutTracker.Web.Microsoft.AspNetCore.StaticWebAssets.props",

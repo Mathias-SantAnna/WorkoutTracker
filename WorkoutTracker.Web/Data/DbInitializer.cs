@@ -1,7 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using WorkoutTracker.Web.Models;
-using System;
-using System.Linq;
 
 namespace WorkoutTracker.Web.Data
 {

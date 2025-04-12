@@ -1,10 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WorkoutTracker.Web.Data;
 using WorkoutTracker.Web.Models;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace WorkoutTracker.Web.Controllers
 {
     public class ExerciseController : Controller

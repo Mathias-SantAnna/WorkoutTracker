@@ -1,10 +1,10 @@
 {
   "Version": 1,
-  "Hash": "at3DWW6NrZEIaJ7Fenn8Mph0k7v/ImJ1HOq65kA4vgk=",
+  "Hash": "R9jN5qnVx7xlubOlEigymXSFrgbdskND5/pOKgO8RWw=",
   "Source": "WorkoutTracker.Web",
   "BasePath": "_content/WorkoutTracker.Web",
   "Mode": "Default",
-  "ManifestType": "Build",
+  "ManifestType": "Publish",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
