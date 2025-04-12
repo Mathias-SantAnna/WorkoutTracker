@@ -1,55 +1,39 @@
-@model WorkoutTracker.Web.Models.WorkoutExercise
+@model WorkoutTracker.Web.Models.Exercise
 
 @{
-    ViewData["Title"] = "Edit Exercise in Workout";
-    var exercises = ViewBag.Exercises as List<WorkoutTracker.Web.Models.Exercise>;
+    ViewData["Title"] = "Edit Exercise";
 }
 
-<h1>Edit Exercise in Workout</h1>
-<h4>@Model.Workout.Name</h4>
+<h1>Edit Exercise</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="WorkoutExerciseId" />
-            <input type="hidden" asp-for="WorkoutId" />
+            <input type="hidden" asp-for="ExerciseId" />
+
             <div class="form-group mb-3">
-                <label class="control-label">Exercise</label>
-                <select asp-for="ExerciseId" class="form-control">
-                    @foreach (var exercise in exercises)
-                    {
-                        if (exercise.ExerciseId == Model.ExerciseId)
-                        {
-                            <option value="@exercise.ExerciseId" selected>@exercise.Name</option>
-                        }
-                        else
-                        {
-                            <option value="@exercise.ExerciseId">@exercise.Name</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="ExerciseId" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
             <div class="form-group mb-3">
-                <label asp-for="Sets" class="control-label"></label>
-                <input asp-for="Sets" class="form-control" />
-                <span asp-validation-for="Sets" class="text-danger"></span>
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+
             <div class="form-group mb-3">
-                <label asp-for="Reps" class="control-label"></label>
-                <input asp-for="Reps" class="form-control" />
-                <span asp-validation-for="Reps" class="text-danger"></span>
+                <label asp-for="TargetMuscle" class="control-label"></label>
+                <input asp-for="TargetMuscle" class="form-control" />
+                <span asp-validation-for="TargetMuscle" class="text-danger"></span>
             </div>
-            <div class="form-group mb-3">
-                <label asp-for="WeightLbs" class="control-label"></label>
-                <input asp-for="WeightLbs" class="form-control" />
-                <span asp-validation-for="WeightLbs" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-controller="Workout" asp-action="Details" asp-route-id="@Model.WorkoutId" class="btn btn-secondary">Back to Workout</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
@@ -57,4 +41,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+}q

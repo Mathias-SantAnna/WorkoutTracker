@@ -1,0 +1,99 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = WorkoutTracker.Web
+build_property.RootNamespace = WorkoutTracker.Web
+build_property.ProjectDir = /Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Exercise/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXhlcmNpc2UvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Exercise/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXhlcmNpc2UvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Exercise/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXhlcmNpc2UvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Exercise/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXhlcmNpc2UvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Exercise/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXhlcmNpc2UvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Workout/AddExercise.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV29ya291dC9BZGRFeGVyY2lzZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Workout/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV29ya291dC9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Workout/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV29ya291dC9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Workout/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV29ya291dC9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Workout/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV29ya291dC9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Workout/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV29ya291dC9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mathiascagnoni/RiderProjects/WorkoutTracker/WorkoutTracker.Web/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-laxx1skh6p
