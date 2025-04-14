@@ -17,14 +17,13 @@ namespace WorkoutTracker.ConsoleClient
             {
                 Console.WriteLine("\nFetching most popular exercises...");
                 
-                // Replace with your actual deployed API URL when deploying
                 string apiUrl = "https://localhost:7117/api/workoutanalysis/popular";
                 
                 using HttpClient client = new HttpClient();
                 var exercises = await client.GetFromJsonAsync<List<PopularExercise>>(apiUrl);
                 
                 Console.WriteLine("\nMost Popular Exercises:");
-                Console.WriteLine("----------------------");
+                Console.WriteLine("-----");
                 
                 if (exercises != null && exercises.Count > 0)
                 {
