@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WorkoutTracker.API.Data;
-using WorkoutTracker.API.Models;
+using WorkoutTracker.Web.Models;
 
 namespace WorkoutTracker.API.Controllers
 {
