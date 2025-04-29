@@ -13,11 +13,8 @@ This is a simple fitness tracker project built using C#, .NET 8, and MySQL. The 
 - **Version Control**: GitHub
 
 ## Features
-- **User Authentication**:
-  - Login page with options to sign in or sign up.
-  - Sign-up page with fields for Name, Login, and Password.
 - **Workout Tracking**:
-  - A calendar interface on the main page.
+  - A calendar interface on the Create Workout page.
   - Users click on a date to mark whether they worked out.
   - Visual feedback: dates turn **green** when a workout is logged, and **red** otherwise.
 - **Responsive Design**:
