@@ -11,17 +11,81 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a843207-1dd9-4700-92a2-bae818afbdaf" name="Changes" comment="" />
+    <list default="true" id="0a843207-1dd9-4700-92a2-bae818afbdaf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.API/Controllers/WorkoutAnalysisController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.API/Controllers/WorkoutAnalysisController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.ConsoleClient/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.ConsoleClient/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.Web/bin/Debug/net8.0/WorkoutTracker.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.Web/bin/Debug/net8.0/WorkoutTracker.Web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.Web/bin/Debug/net8.0/WorkoutTracker.Web.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.Web/bin/Debug/net8.0/WorkoutTracker.Web.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/WorkoutTracker.Web.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/WorkoutTracker.Web.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/WorkoutTracker.Web.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/WorkoutTracker.Web.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/WorkoutTracker.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/WorkoutTracker.Web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/WorkoutTracker.Web.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/WorkoutTracker.Web.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/WorkoutTracker.Web.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/WorkoutTracker.Web.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/ref/WorkoutTracker.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/ref/WorkoutTracker.Web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/refint/WorkoutTracker.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WorkoutTracker.Web/obj/Debug/net8.0/refint/WorkoutTracker.Web.dll" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Mathias-SantAnna&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:Mathias-SantAnna/WorkoutTracker.git&quot;,
+    &quot;accountId&quot;: &quot;9ff99594-9ab8-4e4f-96ad-dfe2cb578a18&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Tests/UnitTest1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.API/Controllers/ExerciseController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.API/Controllers/WorkoutAnalysisController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.API/Models/WorkoutTrackerContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.API/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.API/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.ConsoleClient/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Controllers/ExerciseController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Controllers/WorkoutController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Controllers/WorkoutExerciseController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Data/DbInitializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Models/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Models/Exercise.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Models/Workout.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Models/WorkoutExercise.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Exercise/Delete.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Exercise/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Exercise/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Home/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Workout/AddExercise.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Workout/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Workout/Delete.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Workout/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Workout/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/Workout/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/_ViewImports.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WorkoutTracker.Web/Views/_ViewStart.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -32,18 +96,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.WorkoutTracker.Web: http.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.WorkoutTracker.Web: http">
     <configuration name="WorkoutTracker.ConsoleClient" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -132,7 +199,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744327248132</updated>
-      <workItem from="1744327250931" duration="17654000" />
+      <workItem from="1744327250931" duration="22032000" />
+      <workItem from="1744402601365" duration="1499000" />
+      <workItem from="1744404115007" duration="11486000" />
     </task>
     <servers />
   </component>

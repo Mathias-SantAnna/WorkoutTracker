@@ -1,86 +1,100 @@
 # Workout Tracker - C# & .NET 8
 CA2 Mini Project for Enterprise Computing and Digital Transformation - TUD
 
-
-
 ## Overview
-This is a simple fitness tracker project built using C#, .NET 8, and MySQL. The application allows users to log their workout activity through an interactive calendar.
+This is a fitness tracker application built using C#, .NET 8, and Azure SQL. The application allows users to track their workouts, exercises, and monitor their progress over time.
 
 ## Tech Stack
-- **Backend**: ASP.NET Core 8 / Web API
-- **Database**: MySQL
-- **Client**: Web Application (ASP.NET Core MVC)
-- **Cloud Deployment**: AWS, Azure, GCP, or OCI
-- **Version Control**: GitHub / GitLab
+- **Backend**: ASP.NET Core 8 MVC
+- **Database**: Azure SQL Server
+- **API**: RESTful Web API with Swagger
+- **Client**: ASP.NET Core MVC Web Application + Console Client for Analysis
+- **Cloud Deployment**: Microsoft Azure
+- **Version Control**: GitHub
 
 ## Features
-- **User Authentication**:
-  - Login page with options to sign in or sign up.
-  - Sign-up page with fields for Name, Login, and Password.
-- **Workout Tracking**:
-  - A calendar interface on the main page.
-  - Users click on a date to mark whether they worked out.
-  - Visual feedback: dates turn **green** when a workout is logged, and **red** otherwise.
+- **Workout Management**:
+  - Create, view, edit, and delete workout sessions
+  - Track workout date, duration, and description
+  - Associate multiple exercises with each workout
+- **Exercise Management**:
+  - Maintain a library of exercises with names, descriptions, and target muscles
+  - Track sets, reps, and weights for each exercise in a workout
+  - Monitor progress over time
+- **Data Analysis**:
+  - RESTful API for workout data analysis
+  - Most popular exercises tracking
+  - Workout statistics (counts, durations, averages)
+  - Exercise progress monitoring
 - **Responsive Design**:
-  - The application is built using ASP.NET Core MVC to ensure a dynamic and responsive user interface.
-- **Cloud Deployment Ready**:
-  - The project is configured for easy deployment to popular cloud platforms like AWS, Azure, GCP, or OCI.
-- **RESTful API**:
-  - The backend exposes API endpoints to handle data operations, making it flexible for integration with other services.
+  - Clean, modern interface built with Bootstrap
+  - Fully responsive design for mobile and desktop use
+- **Cloud Deployment**:
+  - Deployed on Azure App Service with CI/CD integration
+  - Azure SQL Database for reliable, scalable data storage
+  - Configured for high availability and security
 
+## Architecture
+The project follows a standard MVC (Model-View-Controller) pattern with:
+- **Models**: Exercise, Workout, WorkoutExercise
+- **Controllers**: For managing CRUD operations
+- **Views**: For user interaction and data presentation
+- **API Controllers**: For analysis and data consumption
 
 ## Setup Instructions
 ### 1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/fitness-tracker.git
-   cd fitness-tracker
-   ```
-### 2. Set Up the MySQL Database
+```sh
+git clone https://github.com/yourusername/workout-tracker.git
+cd workout-tracker
+```
 
-Although the default configuration in `appsettings.json` might be set to SQL Server LocalDB, this project is designed to work with MySQL. Follow these steps to configure MySQL:
+### 2. Configure the Azure SQL Database
+- **Connection String**:
+  - The application is configured to use Azure SQL Database
+  - Update the connection string in `appsettings.json` if needed:
+  ```json
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=tcp:severworkout.database.windows.net,1433;Initial Catalog=Workouttracker;Persist Security Info=False;User ID=yourusername;Password=yourpassword;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  }
+  ```
 
-- **Install MySQL Server:**  
-  Download and install [MySQL Community Server](https://dev.mysql.com/downloads/) if you haven’t already.
+### 3. Run the web application:
+```sh
+dotnet run --project WorkoutTracker.Web
+```
 
-- **Create the Database:**
-  - Open your MySQL client (such as MySQL Workbench) or use the command line.
-  - Create a new database named `FitnessTracker`:
-    ```sql
-    CREATE DATABASE FitnessTracker;
-    ```
+### 4. Run the analysis console client:
+```sh
+dotnet run --project WorkoutTracker.ConsoleClient
+```
 
-- **Run SQL Scripts:**
-  - Navigate to the `/Database` folder in the repository where you will find the SQL scripts.
-  - Execute these scripts in your MySQL client or via the command line to create the necessary tables and seed data.
-
-- **Update the Connection String:**
-  - Open `appsettings.json` and update the connection string under `"ConnectionStrings"` to point to your MySQL database. For example:
-    ```json
-    "ConnectionStrings": {
-      "DefaultConnection": "server=localhost;port=3306;database=FitnessTracker;user=yourusername;password=yourpassword"
-    }
-    ```
-  - Replace `yourusername` and `yourpassword` with your actual MySQL credentials.
-
-- **Test the Connection:**  
-  Run the application to confirm that it connects successfully to your MySQL database.
-
-### 3. Update the connection string in `appsettings.json`.
-### 4. Run the backend API:
-   ```sh
-   dotnet run --project WebApi
-   ```
-### 5. Run the frontend application:
-   ```sh
-   dotnet run --project FitnessTrackerApp
-   ```
+### 5. API Access
+- Swagger UI is available in development mode at `/swagger`
+- API endpoints:
+  - GET `/api/status` - Check API health status
+  - GET `/api/exercises` - Get all exercises
+  - GET `/api/exercises/{id}` - Get a specific exercise by ID
 
 ## Deployment
-- The application can be deployed to AWS, Azure, GCP, or OCI.
-- CI/CD setup for automatic deployment (coming soon!).
+The application is deployed to Azure App Service using the following steps:
+1. Create an Azure App Service
+2. Configure the Azure SQL Server firewall to allow connections
+3. Deploy the application using Visual Studio, Rider, or Azure DevOps pipelines
+4. Set up connection strings and application settings in Azure
+
+## Azure Resources
+- **App Service**: workouttracker-akg5c7fhg3beggcg.northeurope-01.azurewebsites.net
+- **SQL Server**: severworkout.database.windows.net
+- **Database**: Workouttracker
+
+## Database Schema
+The application uses a relational database with the following main tables:
+- **Exercises**: Store exercise information
+- **Workouts**: Store workout sessions
+- **WorkoutExercises**: Junction table for the many-to-many relationship
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you’d like to change.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
 
 ## License
 MIT License
