@@ -52,10 +52,12 @@ cd workout-tracker
 - **Connection String**:
   - The application is configured to use Azure SQL Database
   - Update the connection string in `appsettings.json` if needed:
-  ```json
+```md
+{
   "ConnectionStrings": {
     "DefaultConnection": "Server=tcp:severworkout.database.windows.net,1433;Initial Catalog=Workouttracker;Persist Security Info=False;User ID=yourusername;Password=yourpassword;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   }
+}
   ```
 
 ### 3. Run the web application:
