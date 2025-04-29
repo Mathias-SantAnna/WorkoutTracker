@@ -1,10 +1,12 @@
 # Workout Tracker - C# & .NET 8
 CA2 Mini Project for Enterprise Computing and Digital Transformation - TUD
 
+
 ## Overview
 This is a fitness tracker application built using C#, .NET 8, and Azure SQL. The application allows users to track their workouts, exercises, and monitor their progress over time.
 
 ## Tech Stack
+
 - **Backend**: ASP.NET Core 8 MVC
 - **Database**: Azure SQL Server
 - **API**: RESTful Web API with Swagger
@@ -26,6 +28,7 @@ This is a fitness tracker application built using C#, .NET 8, and Azure SQL. The
   - Most popular exercises tracking
   - Workout statistics (counts, durations, averages)
   - Exercise progress monitoring
+
 - **Responsive Design**:
   - Clean, modern interface built with Bootstrap
   - Fully responsive design for mobile and desktop use

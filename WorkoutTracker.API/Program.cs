@@ -9,8 +9,10 @@ namespace WorkoutTracker.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
             // Add services to the container
             builder.Services.AddControllers();
+
 
             // Configure DbContext with SQL Server
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -40,6 +42,7 @@ namespace WorkoutTracker.API
 
             var app = builder.Build();
 
+
             // Configure the HTTP request pipeline
             app.UseSwagger();
             app.UseSwaggerUI();
@@ -52,8 +55,10 @@ namespace WorkoutTracker.API
             app.MapGet("/api/status", () => new { Status = "API is running", DateTime = DateTime.UtcNow })
                 .WithName("GetStatus");
 
+
             app.MapControllers();
             app.Run();
         }
     }
 }
+

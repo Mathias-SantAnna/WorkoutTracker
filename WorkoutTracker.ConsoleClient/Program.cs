@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 
 namespace WorkoutTracker.ConsoleClient
 {
@@ -16,6 +16,7 @@ namespace WorkoutTracker.ConsoleClient
             while (true)
             {
                 try
+
                 {
                     DisplayMenu();
                     string choice = Console.ReadLine();
@@ -201,6 +202,7 @@ namespace WorkoutTracker.ConsoleClient
         public string Exercise { get; set; }
         public int Count { get; set; }
     }
+
     
     public class WorkoutStats
     {

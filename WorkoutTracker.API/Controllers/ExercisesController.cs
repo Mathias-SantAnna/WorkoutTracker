@@ -15,14 +15,13 @@ namespace WorkoutTracker.API.Controllers
             _context = context;
         }
 
-        // GET: api/exercises
+        //GET api exercises
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Exercise>>> GetExercises()
         {
             return await _context.Exercises.ToListAsync();
         }
 
-        // GET: api/exercises/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Exercise>> GetExercise(int id)
         {
