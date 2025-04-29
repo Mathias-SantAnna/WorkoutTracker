@@ -1,0 +1,47 @@
+# Ignore build output
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Rider IDE files
+.idea/
+*.sln.iml
+
+# VSCode
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build artifacts
+*.log
+*.cache
+*.db
+*.pid
+*.tmp
+
+# Dotnet project-specific
+*.nupkg
+*.snupkg
+*.nuspec
+*.psess
+*.vsp
+*.vspx
+*.vspscc
+*.vssscc
+_TestResult*
+*.coverage
+*.coveragexml
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
