@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create Workout";
+    var exercises = ViewBag.Exercises as List<WorkoutTracker.Web.Models.Exercise>;
 }
 
 <h1>Create Workout</h1>
@@ -9,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-6">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mb-3">
                 <label asp-for="Name" class="control-label"></label>
@@ -31,6 +32,34 @@
                 <input asp-for="DurationMinutes" class="form-control" />
                 <span asp-validation-for="DurationMinutes" class="text-danger"></span>
             </div>
+
+            <h4 class="mt-4">Add Exercise</h4>
+            <div class="form-group mb-3">
+                <label class="control-label">Exercise</label>
+                <select name="ExerciseId" class="form-control">
+                    <option value="">-- Select Exercise (Optional) --</option>
+                    @if (exercises != null)
+                    {
+                        foreach (var exercise in exercises)
+                        {
+                            <option value="@exercise.ExerciseId">@exercise.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label class="control-label">Sets</label>
+                <input name="Sets" class="form-control" type="number" min="1" />
+            </div>
+            <div class="form-group mb-3">
+                <label class="control-label">Reps</label>
+                <input name="Reps" class="form-control" type="number" min="1" />
+            </div>
+            <div class="form-group mb-3">
+                <label class="control-label">Weight (lbs)</label>
+                <input name="WeightLbs" class="form-control" type="number" step="0.5" />
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
