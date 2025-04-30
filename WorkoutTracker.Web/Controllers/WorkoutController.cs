@@ -44,7 +44,7 @@ namespace WorkoutTracker.Web.Controllers
             return View();
         }
 
-// POST: Workout/Create
+        // POST: Workout/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Workout workout, int? ExerciseId, int? Sets, int? Reps, decimal? WeightLbs)

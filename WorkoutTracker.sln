@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutTracker.API", "Worko
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutTracker.ConsoleClient", "WorkoutTracker.ConsoleClient\WorkoutTracker.ConsoleClient.csproj", "{51C193A1-CA84-43B2-B6B8-491D3B4F0A9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutTracker.Tests", "WorkoutTracker.Tests\WorkoutTracker.Tests.csproj", "{E000C24E-D985-4822-87D4-22F31D127F24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{51C193A1-CA84-43B2-B6B8-491D3B4F0A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51C193A1-CA84-43B2-B6B8-491D3B4F0A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51C193A1-CA84-43B2-B6B8-491D3B4F0A9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E000C24E-D985-4822-87D4-22F31D127F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E000C24E-D985-4822-87D4-22F31D127F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E000C24E-D985-4822-87D4-22F31D127F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E000C24E-D985-4822-87D4-22F31D127F24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,64 +1,47 @@
 using Microsoft.EntityFrameworkCore;
-using WorkoutTracker.Web.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
+using WorkoutTracker.Web.Models; // Make sure your Web project is referenced
 
-namespace WorkoutTracker.API
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container
+builder.Services.AddControllers();
+
+// Configure DbContext with SQL Server - FIXED SYNTAX
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Add CORS policy
+builder.Services.AddCors(options =>
 {
-    public static class Program
-    {
-        public static void Main(string[] args)
+    options.AddPolicy("AllowAllOrigins",
+        policy => 
         {
-            var builder = WebApplication.CreateBuilder(args);
+            policy.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
 
+// Add Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-            // Add services to the container
-            builder.Services.AddControllers();
+var app = builder.Build();
 
+// Configure the HTTP request pipeline
+app.UseSwagger();
+app.UseSwaggerUI();
 
-            // Configure DbContext with SQL Server
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    builder.Configuration.GetConnectionString("DefaultConnection"),
-                    sqlOptions => sqlOptions.EnableRetryOnFailure(
-                        maxRetryCount: 5,
-                        maxRetryDelay: TimeSpan.FromSeconds(30),
-                        errorNumbersToAdd: null)
-                ));
+app.UseHttpsRedirection();
+app.UseCors("AllowAllOrigins");
+app.UseAuthorization();
 
-            // Add CORS policy
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAllOrigins",
-                    policyBuilder => 
-                    {
-                        policyBuilder.AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader();
-                    });
-            });
+// Add a simple endpoint for basic API functionality test
+app.MapGet("/api/status", () => new { Status = "API is running", DateTime = DateTime.UtcNow })
+    .WithName("GetStatus");
 
-            // Add Swagger
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            var app = builder.Build();
-
-
-            // Configure the HTTP request pipeline
-            app.UseSwagger();
-            app.UseSwaggerUI();
-
-            app.UseHttpsRedirection();
-            app.UseCors("AllowAllOrigins");
-            app.UseAuthorization();
-
-            // Add a simple endpoint for basic API functionality test
-            app.MapGet("/api/status", () => new { Status = "API is running", DateTime = DateTime.UtcNow })
-                .WithName("GetStatus");
-
-
-            app.MapControllers();
-            app.Run();
-        }
-    }
-}
-
+app.MapControllers();
+app.Run();

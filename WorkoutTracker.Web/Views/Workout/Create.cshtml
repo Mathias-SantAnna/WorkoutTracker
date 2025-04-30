@@ -12,6 +12,8 @@
     <div class="col-md-6">
         <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Workout Details -->
             <div class="form-group mb-3">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -33,31 +35,91 @@
                 <span asp-validation-for="DurationMinutes" class="text-danger"></span>
             </div>
 
-            <h4 class="mt-4">Add Exercise</h4>
-            <div class="form-group mb-3">
-                <label class="control-label">Exercise</label>
-                <select name="ExerciseId" class="form-control">
-                    <option value="">-- Select Exercise (Optional) --</option>
-                    @if (exercises != null)
-                    {
-                        foreach (var exercise in exercises)
+            <!-- Exercises Section -->
+            <h4 class="mt-4">Exercises</h4>
+
+            <!-- First Exercise -->
+            <div class="exercise-section card mb-3 p-3">
+                <div class="form-group mb-3">
+                    <label class="control-label">Exercise</label>
+                    <select name="ExerciseIds[0]" class="form-control">
+                        <option value="0">-- Select Exercise --</option>
+                        @foreach (var exercise in exercises)
                         {
                             <option value="@exercise.ExerciseId">@exercise.Name</option>
                         }
-                    }
-                </select>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Sets</label>
+                    <input name="Sets[0]" type="number" min="1" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Reps</label>
+                    <input name="Reps[0]" type="number" min="1" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Weight (lbs)</label>
+                    <input name="WeightLbs[0]" type="number" step="0.5" class="form-control" />
+                </div>
             </div>
-            <div class="form-group mb-3">
-                <label class="control-label">Sets</label>
-                <input name="Sets" class="form-control" type="number" min="1" />
+
+            <!-- Second Exercise (initially hidden) -->
+            <div class="exercise-section card mb-3 p-3" id="exercise-2" style="display:none;">
+                <div class="form-group mb-3">
+                    <label class="control-label">Exercise</label>
+                    <select name="ExerciseIds[1]" class="form-control">
+                        <option value="0">-- Select Exercise --</option>
+                        @foreach (var exercise in exercises)
+                        {
+                            <option value="@exercise.ExerciseId">@exercise.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Sets</label>
+                    <input name="Sets[1]" type="number" min="1" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Reps</label>
+                    <input name="Reps[1]" type="number" min="1" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Weight (lbs)</label>
+                    <input name="WeightLbs[1]" type="number" step="0.5" class="form-control" />
+                </div>
+                <button type="button" class="btn btn-sm btn-danger remove-exercise">Remove</button>
             </div>
-            <div class="form-group mb-3">
-                <label class="control-label">Reps</label>
-                <input name="Reps" class="form-control" type="number" min="1" />
+
+            <!-- Third Exercise (initially hidden) -->
+            <div class="exercise-section card mb-3 p-3" id="exercise-3" style="display:none;">
+                <div class="form-group mb-3">
+                    <label class="control-label">Exercise</label>
+                    <select name="ExerciseIds[2]" class="form-control">
+                        <option value="0">-- Select Exercise --</option>
+                        @foreach (var exercise in exercises)
+                        {
+                            <option value="@exercise.ExerciseId">@exercise.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Sets</label>
+                    <input name="Sets[2]" type="number" min="1" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Reps</label>
+                    <input name="Reps[2]" type="number" min="1" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Weight (lbs)</label>
+                    <input name="WeightLbs[2]" type="number" step="0.5" class="form-control" />
+                </div>
+                <button type="button" class="btn btn-sm btn-danger remove-exercise">Remove</button>
             </div>
+
             <div class="form-group mb-3">
-                <label class="control-label">Weight (lbs)</label>
-                <input name="WeightLbs" class="form-control" type="number" step="0.5" />
+                <button type="button" id="add-exercise" class="btn btn-outline-success">Add Another Exercise</button>
             </div>
 
             <div class="form-group">
@@ -70,4 +132,33 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function() {
+            let exerciseCount = 1;
+
+            // Add exercise button
+            $("#add-exercise").click(function() {
+                exerciseCount++;
+                if (exerciseCount <= 3) {
+                    $("#exercise-" + exerciseCount).show();
+                }
+
+                // Hide add button if we reached max
+                if (exerciseCount >= 3) {
+                    $(this).hide();
+                }
+            });
+
+            // Remove exercise button
+            $(".remove-exercise").click(function() {
+                $(this).closest(".exercise-section").hide();
+                $(this).closest(".exercise-section").find("select").val("0");
+                $(this).closest(".exercise-section").find("input").val("");
+                exerciseCount--;
+
+                // Show add button again
+                $("#add-exercise").show();
+            });
+        });
+    </script>
 }
