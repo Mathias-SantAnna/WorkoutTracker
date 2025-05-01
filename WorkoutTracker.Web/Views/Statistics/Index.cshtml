@@ -1,0 +1,294 @@
+@model WorkoutTracker.Web.Models.StatisticsViewModel
+@{
+    ViewData["Title"] = "Workout Statistics";
+}
+
+<div class="container">
+    <h1 class="text-primary mb-4">
+        <i class="bi bi-graph-up me-2"></i>Workout Statistics
+    </h1>
+
+    <div class="row">
+        <!-- Overall Stats -->
+        <div class="col-md-12 mb-4">
+            <div class="card workout-card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-clipboard-data me-2"></i>Overall Stats</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <div class="p-3">
+                                <h3 class="display-4 text-primary">@Model.WorkoutStats.TotalWorkouts</h3>
+                                <p class="lead">Total Workouts</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3">
+                                <h3 class="display-4 text-primary">@Model.WorkoutStats.TotalExercises</h3>
+                                <p class="lead">Total Exercises</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3">
+                                <h3 class="display-4 text-primary">@Model.WorkoutStats.TotalDurationMinutes</h3>
+                                <p class="lead">Total Minutes</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3">
+                                <h3 class="display-4 text-primary">@Model.WorkoutStats.AverageDurationMinutes</h3>
+                                <p class="lead">Avg. Duration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card workout-card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-star me-2"></i>Popular Exercises</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.PopularExercises != null && Model.PopularExercises.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Exercise</th>
+                                        <th>Count</th>
+                                        <th>Progress</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var exercise in Model.PopularExercises)
+                                    {
+                                        <tr>
+                                            <td><i class="bi bi-bicycle me-2 text-primary"></i>@exercise.Exercise</td>
+                                            <td>@exercise.Count</td>
+                                            <td>
+                                                <div class="progress">
+                                                    @{
+                                                        int percentage = Model.PopularExercises.Max(e => e.Count) > 0
+                                                            ? (exercise.Count * 100) / Model.PopularExercises.Max(e => e.Count)
+                                                            : 0;
+                                                    }
+                                                    <div class="progress-bar bg-primary" role="progressbar" 
+                                                        style="width: @percentage%;" 
+                                                        aria-valuenow="@percentage" aria-valuemin="0" aria-valuemax="100">
+                                                        @percentage%
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">No exercise data available.</div>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card workout-card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>Recent Workouts</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.RecentWorkouts != null && Model.RecentWorkouts.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Name</th>
+                                        <th>Duration</th>
+                                        <th>Exercises</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var workout in Model.RecentWorkouts)
+                                    {
+                                        <tr>
+                                            <td>@workout.WorkoutDate.ToShortDateString()</td>
+                                            <td>@workout.Name</td>
+                                            <td>@workout.DurationMinutes min</td>
+                                            <td>@workout.ExerciseCount</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">No recent workout data available.</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @if (Model.ExerciseProgress != null && Model.ExerciseProgress.ProgressData.Any())
+    {
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <div class="card workout-card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-graph-up me-2"></i>Progress for @Model.ExerciseProgress.Exercise</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Sets</th>
+                                        <th>Reps</th>
+                                        <th>Weight (lbs)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var entry in Model.ExerciseProgress.ProgressData)
+                                    {
+                                        <tr>
+                                            <td>@entry.Date.ToShortDateString()</td>
+                                            <td>@entry.Sets</td>
+                                            <td>@entry.Reps</td>
+                                            <td>@(entry.WeightLbs.HasValue ? entry.WeightLbs.Value.ToString() : "N/A")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            
+                            @if (Model.ExerciseProgress.ProgressData.Count > 1)
+                            {
+                                var firstEntry = Model.ExerciseProgress.ProgressData.First();
+                                var lastEntry = Model.ExerciseProgress.ProgressData.Last();
+                                var hasWeightData = firstEntry.WeightLbs.HasValue && lastEntry.WeightLbs.HasValue;
+                                
+                                if (hasWeightData)
+                                {
+                                    var improvement = lastEntry.WeightLbs.Value - firstEntry.WeightLbs.Value;
+                                    var percentImprovement = firstEntry.WeightLbs.Value > 0 
+                                        ? (int)((improvement / firstEntry.WeightLbs.Value) * 100)
+                                        : 0;
+                                    
+                                    <div class="mt-3 p-3 @(improvement >= 0 ? "bg-success" : "bg-danger") bg-opacity-10 rounded">
+                                        <h5 class="text-@(improvement >= 0 ? "success" : "danger")">
+                                            <i class="bi bi-@(improvement >= 0 ? "arrow-up" : "arrow-down")-circle me-2"></i>
+                                            Weight Progress: @improvement lbs (@percentImprovement%)
+                                        </h5>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card workout-card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-graph-up me-2"></i>Exercise Progress Chart</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="exerciseChart" width="600" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 text-center mb-4">
+            <img src="~/images/AthletesTraining.png" alt="Fitness Statistics" class="img-fluid" style="max-height: 200px;" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const exerciseLabels = [
+            'Squat',
+            'Deadlift',
+            'Shoulder Press',
+            'Leg Press',
+            'Bench Press'
+        ];
+
+        const maxWeights = [
+            245, 
+            295,
+            95, 
+            360, 
+            155  
+        ];
+
+        // Create Chart
+        const ctx = document.getElementById('exerciseChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: exerciseLabels,
+                datasets: [{
+                    label: 'Max Weight Lifted',
+                    data: maxWeights,
+                    backgroundColor: [
+                        'rgba(108, 99, 255, 0.5)',
+                        'rgba(44, 235, 235, 0.5)',
+                        'rgba(128, 203, 196, 0.5)',
+                        'rgba(108, 99, 255, 0.5)',
+                        'rgba(44, 235, 235, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(108, 99, 255, 1)',
+                        'rgba(44, 235, 235, 1)',
+                        'rgba(128, 203, 196, 1)',
+                        'rgba(108, 99, 255, 1)',
+                        'rgba(44, 235, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Weight (lbs)'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Max Weight by Exercise',
+                        color: '#6c63ff',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+}

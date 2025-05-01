@@ -15,26 +15,25 @@ namespace WorkoutTracker.Web.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure the primary key
+            // Configure primary key
             modelBuilder.Entity<WorkoutExercise>()
                 .HasKey(we => we.WorkoutExerciseId);
 
-            // Configure WorkoutExercise → Workout (many-to-one)
+            // Configure WorkoutExercise → Workout
             modelBuilder.Entity<WorkoutExercise>()
                 .HasOne(we => we.Workout)
                 .WithMany(w => w.WorkoutExercises)
                 .HasForeignKey(we => we.WorkoutId);
 
-            // Configure WorkoutExercise → Exercise (many-to-one)
+            // Configure WorkoutExercise → Exercise
             modelBuilder.Entity<WorkoutExercise>()
                 .HasOne(we => we.Exercise)
                 .WithMany(e => e.WorkoutExercises)
                 .HasForeignKey(we => we.ExerciseId);
-
-            // Set precision for decimal property to avoid SQL Server warning
+            
             modelBuilder.Entity<WorkoutExercise>()
                 .Property(we => we.WeightLbs)
-                .HasPrecision(5, 2); // e.g., allows up to 999.99
+                .HasPrecision(5, 2);
         }
     }
 }

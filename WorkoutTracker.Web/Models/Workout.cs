@@ -22,7 +22,6 @@ namespace WorkoutTracker.Web.Models
         [Display(Name = "Duration (minutes)")]
         public int DurationMinutes { get; set; }
         
-        // Navigation property
         public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
     }
 }

@@ -12,8 +12,7 @@
     <div class="col-md-6">
         <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <!-- Workout Details -->
+            
             <div class="form-group mb-3">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -34,11 +33,10 @@
                 <input asp-for="DurationMinutes" class="form-control" />
                 <span asp-validation-for="DurationMinutes" class="text-danger"></span>
             </div>
-
-            <!-- Exercises Section -->
+            
             <h4 class="mt-4">Exercises</h4>
 
-            <!-- First Exercise -->
+            <!-- First -->
             <div class="exercise-section card mb-3 p-3">
                 <div class="form-group mb-3">
                     <label class="control-label">Exercise</label>
@@ -64,7 +62,7 @@
                 </div>
             </div>
 
-            <!-- Second Exercise (initially hidden) -->
+            <!-- Second (hidden) -->
             <div class="exercise-section card mb-3 p-3" id="exercise-2" style="display:none;">
                 <div class="form-group mb-3">
                     <label class="control-label">Exercise</label>
@@ -91,7 +89,7 @@
                 <button type="button" class="btn btn-sm btn-danger remove-exercise">Remove</button>
             </div>
 
-            <!-- Third Exercise (initially hidden) -->
+            <!-- Third (hidden) -->
             <div class="exercise-section card mb-3 p-3" id="exercise-3" style="display:none;">
                 <div class="form-group mb-3">
                     <label class="control-label">Exercise</label>

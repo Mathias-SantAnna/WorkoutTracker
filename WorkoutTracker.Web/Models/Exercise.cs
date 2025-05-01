@@ -9,7 +9,6 @@ namespace WorkoutTracker.Web.Models
         public string Description { get; set; } = string.Empty;
         public string TargetMuscle { get; set; } = string.Empty;
         
-        // Navigation property
         public virtual ICollection<WorkoutExercise>? WorkoutExercises { get; set; }
     }
 }

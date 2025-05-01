@@ -11,7 +11,7 @@ namespace WorkoutTracker.Web.Data
             // Look for any exercises
             if (context.Exercises.Any())
             {
-                return; // DB has been seeded
+                return;
             }
 
             var exercises = new Exercise[]

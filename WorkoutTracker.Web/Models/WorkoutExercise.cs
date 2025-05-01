@@ -23,7 +23,6 @@ namespace WorkoutTracker.Web.Models
         [Display(Name = "Weight (lbs)")]
         public decimal? WeightLbs { get; set; }
         
-        // Navigation properties
         public virtual Workout? Workout { get; set; }
         public virtual Exercise? Exercise { get; set; }
     }
