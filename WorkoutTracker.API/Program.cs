@@ -2,18 +2,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using WorkoutTracker.Web.Models; // Make sure your Web project is referenced
+using WorkoutTracker.Web.Models; 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// Add services to container
 builder.Services.AddControllers();
 
-// Configure DbContext with SQL Server - FIXED SYNTAX
+// DbContext - SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add CORS policy
+// CORS policy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
@@ -25,13 +25,13 @@ builder.Services.AddCors(options =>
         });
 });
 
-// Add Swagger
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+// Configure HTTP request
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -39,7 +39,7 @@ app.UseHttpsRedirection();
 app.UseCors("AllowAllOrigins");
 app.UseAuthorization();
 
-// Add a simple endpoint for basic API functionality test
+// Add endpoint API test
 app.MapGet("/api/status", () => new { Status = "API is running", DateTime = DateTime.UtcNow })
     .WithName("GetStatus");
 

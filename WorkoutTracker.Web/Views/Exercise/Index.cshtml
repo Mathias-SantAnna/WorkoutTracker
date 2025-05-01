@@ -4,44 +4,65 @@
     ViewData["Title"] = "Exercises";
 }
 
-<h1>Exercises</h1>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-primary"><i class="bi bi-bicycle me-2"></i>Exercises</h1>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-2"></i>Create New
+        </a>
+    </div>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TargetMuscle)
-        </th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TargetMuscle)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ExerciseId" class="btn btn-sm btn-warning">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.ExerciseId" class="btn btn-sm btn-info">Details</a>
-                <a asp-action="Delete" asp-route-id="@item.ExerciseId" class="btn btn-sm btn-danger">Delete</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                    <tr>
+                        <th>
+                            <i class="bi bi-grid me-2"></i>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            <i class="bi bi-card-text me-2"></i>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>
+                            <i class="bi bi-bullseye me-2"></i>
+                            @Html.DisplayNameFor(model => model.TargetMuscle)
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                <span class="fw-bold">@Html.DisplayFor(modelItem => item.Name)</span>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                <span class="badge bg-secondary">@Html.DisplayFor(modelItem => item.TargetMuscle)</span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-action="Edit" asp-route-id="@item.ExerciseId" class="btn btn-sm btn-outline-warning">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.ExerciseId" class="btn btn-sm btn-outline-info">
+                                        <i class="bi bi-info-circle"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.ExerciseId" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
