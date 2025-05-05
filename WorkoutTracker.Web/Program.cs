@@ -4,13 +4,23 @@ using WorkoutTracker.Web.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddFilter(
+    category: "Microsoft.EntityFrameworkCore.Database.Command",
+    LogLevel.Warning
+);
+builder.Logging.AddFilter(
+    category: "Microsoft.EntityFrameworkCore",
+    LogLevel.Warning
+);
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         sqlOptions => sqlOptions.EnableRetryOnFailure()
-    ));
+    )
+);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -44,6 +54,7 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
 app.Run();

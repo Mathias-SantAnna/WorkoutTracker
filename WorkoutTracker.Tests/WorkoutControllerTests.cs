@@ -16,12 +16,10 @@ namespace WorkoutTracker.Tests
         [Test]
         public async Task Create_WithMultipleExercises_AddsExercisesToWorkout()
         {
-            // Arrange - Setup in-memory database for testing
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "TestWorkoutDb")
                 .Options;
     
-            // Add test exercises to database
             using (var context = new ApplicationDbContext(options))
             {
                 context.Exercises.Add(new Exercise { ExerciseId = 1, Name = "Bench Press" });
@@ -29,7 +27,6 @@ namespace WorkoutTracker.Tests
                 context.SaveChanges();
             }
     
-            // Act - Create a workout with exercises
             using (var context = new ApplicationDbContext(options))
             {
                 var controller = new WorkoutController(context);
@@ -41,17 +38,14 @@ namespace WorkoutTracker.Tests
                     DurationMinutes = 30
                 };
         
-                // Create lists for the multiple exercise parameters
                 var exerciseIds = new List<int> { 1 };
                 var sets = new List<int> { 3 };
                 var reps = new List<int> { 10 };
                 var weights = new List<decimal?> { 100m };
         
-                // Call Create with the lists
                 await controller.Create(workout, exerciseIds, sets, reps, weights);
             }
     
-            // Assert - Verify workout and exercise was saved correctly
             using (var context = new ApplicationDbContext(options))
             {
                 var savedWorkout = context.Workouts

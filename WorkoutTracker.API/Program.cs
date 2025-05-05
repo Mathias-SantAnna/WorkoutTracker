@@ -6,14 +6,12 @@ using WorkoutTracker.Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to container
 builder.Services.AddControllers();
 
-// DbContext - SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// CORS policy
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
@@ -31,7 +29,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure HTTP request
+// Config HTTP request
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -39,7 +37,7 @@ app.UseHttpsRedirection();
 app.UseCors("AllowAllOrigins");
 app.UseAuthorization();
 
-// Add endpoint API test
+// Endpoint API test
 app.MapGet("/api/status", () => new { Status = "API is running", DateTime = DateTime.UtcNow })
     .WithName("GetStatus");
 

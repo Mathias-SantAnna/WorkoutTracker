@@ -137,7 +137,7 @@ namespace WorkoutTracker.ConsoleClient
         {
             Console.WriteLine("\nFetching exercises...");
             
-            // First get all exercises to let user choose one
+            // Get exercises User choice
             string exercisesUrl = $"{ApiBaseUrl}/exercises";
             var exercises = await Client.GetFromJsonAsync<List<Exercise>>(exercisesUrl);            
             if (exercises == null || exercises.Count == 0)

@@ -19,7 +19,6 @@ namespace WorkoutTracker.API.Controllers
             _context = context;
         }
 
-        // GET: api/workoutanalysis/popular
         [HttpGet("popular")]
         public async Task<List<ExerciseUsage>> GetPopularExercises()
         {
@@ -37,7 +36,6 @@ namespace WorkoutTracker.API.Controllers
             return popularExercises;
         }
 
-        // GET: api/workoutanalysis/stats
         [HttpGet("stats")]
         public async Task<WorkoutStats> GetWorkoutStats()
         {
@@ -54,7 +52,6 @@ namespace WorkoutTracker.API.Controllers
             };
         }
 
-        // GET: api/workoutanalysis/recent?count=5
         [HttpGet("recent")]
         public async Task<List<RecentWorkout>> GetRecentWorkouts(int count = 5)
         {
@@ -74,7 +71,6 @@ namespace WorkoutTracker.API.Controllers
             return recentWorkouts;
         }
 
-        // GET: api/workoutanalysis/progress/5
         [HttpGet("progress/{exerciseId}")]
         public async Task<ActionResult<ExerciseProgressResponse>> GetExerciseProgress(int exerciseId)
         {

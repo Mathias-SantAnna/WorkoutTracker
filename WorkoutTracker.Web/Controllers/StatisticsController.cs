@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using WorkoutTracker.Web.Models;
 
 namespace WorkoutTracker.Web.Controllers
@@ -18,7 +15,6 @@ namespace WorkoutTracker.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Get workout stats
             var workoutStats = new WorkoutStats
             {
                 TotalWorkouts = await _context.Workouts.CountAsync(),
@@ -29,7 +25,6 @@ namespace WorkoutTracker.Web.Controllers
                     : 0
             };
 
-            // Get popular exercises
             var popularExercises = await _context.WorkoutExercises
                 .Include(we => we.Exercise)
                 .GroupBy(we => we.ExerciseId)
@@ -42,7 +37,6 @@ namespace WorkoutTracker.Web.Controllers
                 .Take(5)
                 .ToListAsync();
 
-            // Get recent workouts
             var recentWorkouts = await _context.Workouts
                 .OrderByDescending(w => w.WorkoutDate)
                 .Take(10)
@@ -56,7 +50,6 @@ namespace WorkoutTracker.Web.Controllers
                 })
                 .ToListAsync();
 
-            // Get exercise progress
             ExerciseProgressResponse exerciseProgress = null;
             var commonExerciseId = await _context.WorkoutExercises
                 .GroupBy(we => we.ExerciseId)

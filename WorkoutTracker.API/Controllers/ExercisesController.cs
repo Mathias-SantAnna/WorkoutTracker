@@ -16,7 +16,6 @@ namespace WorkoutTracker.API.Controllers
             _context = context;
         }
 
-        //GET api exercises
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Exercise>>> GetExercises()
         {

@@ -2,18 +2,18 @@
 
 @{
     ViewData["Title"] = "Edit Workout";
-    var exercises = ViewBag.Exercises as List<WorkoutTracker.Web.Models.Exercise> ?? new List<WorkoutTracker.Web.Models.Exercise>();
-    var workoutExercises = ViewBag.WorkoutExercises as List<WorkoutTracker.Web.Models.WorkoutExercise> ?? new List<WorkoutTracker.Web.Models.WorkoutExercise>();
+    var exercises = ViewBag.Exercises as List<WorkoutTracker.Web.Models.Exercise>;
+    var workoutExercises = ViewBag.WorkoutExercises as List<WorkoutTracker.Web.Models.WorkoutExercise>;
 }
 
 <h1>Edit Workout</h1>
 
-<div class="card">
+<div class="card mb-4">
     <div class="card-header bg-primary text-white">
-        Edit Workout
+        @Model.Name
     </div>
     <div class="card-body">
-        <form asp-action="Edit" asp-controller="Workout" method="post">
+        <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="WorkoutId" />
 
@@ -42,20 +42,19 @@
             </div>
 
             <!-- Current Exercises Section -->
-            @if (workoutExercises != null && workoutExercises.Count > 0)
-            {
-                <h4 class="mt-4">Current Exercises</h4>
+            <h4>Current Exercises</h4>
 
-                @for (int i = 0; i < workoutExercises.Count; i++)
+            @if (workoutExercises != null && workoutExercises.Any())
+            {
+                for (int i = 0; i < workoutExercises.Count; i++)
                 {
                     var exercise = workoutExercises[i];
-                    <div class="mb-4 p-3 border rounded">
-                        <input type="hidden" name="ExistingExerciseIds[@i]" value="@exercise.WorkoutExerciseId" />
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <input type="hidden" name="ExistingExerciseIds[@i]" value="@exercise.WorkoutExerciseId" />
 
-                        <div class="form-group mb-3">
-                            <label>Exercise</label>
-                            @if (exercises != null && exercises.Any())
-                            {
+                            <div class="form-group mb-3">
+                                <label>Exercise</label>
                                 <select name="ExistingExerciseTypeIds[@i]" class="form-control">
                                     @foreach (var ex in exercises)
                                     {
@@ -69,47 +68,46 @@
                                         }
                                     }
                                 </select>
-                            }
-                            else
-                            {
-                                <input type="text" value="@exercise.Exercise?.Name" class="form-control" readonly />
-                                <input type="hidden" name="ExistingExerciseTypeIds[@i]" value="@exercise.ExerciseId" />
-                            }
-                        </div>
+                            </div>
 
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label>Sets</label>
-                                    <input type="number" name="ExistingSets[@i]" value="@exercise.Sets" min="1" class="form-control" />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label>Sets</label>
+                                        <input type="number" name="ExistingSets[@i]" value="@exercise.Sets" class="form-control" min="1" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label>Reps</label>
+                                        <input type="number" name="ExistingReps[@i]" value="@exercise.Reps" class="form-control" min="1" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label>Weight (lbs)</label>
+                                        <input type="number" name="ExistingWeights[@i]" value="@exercise.WeightLbs" class="form-control" step="0.5" />
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label>Reps</label>
-                                    <input type="number" name="ExistingReps[@i]" value="@exercise.Reps" min="1" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label>Weight (lbs)</label>
-                                    <input type="number" name="ExistingWeights[@i]" value="@exercise.WeightLbs" step="0.5" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
 
-                        <button type="button" class="btn btn-danger delete-exercise-btn" data-exercise-id="@exercise.WorkoutExerciseId">
-                            Delete Exercise
-                        </button>
+                            <button type="button" class="btn btn-danger delete-exercise-btn" data-exercise-id="@exercise.WorkoutExerciseId">
+                                Delete Exercise
+                            </button>
+                        </div>
                     </div>
                 }
+            }
+            else
+            {
+                <p>No exercises found for this workout.</p>
             }
 
             <!-- Add Exercises Section -->
             <h4 class="mt-4">Add Exercises</h4>
 
-            <div id="new-exercises-container">
-                <div class="mb-4 p-3 border rounded">
+            <div class="card">
+                <div class="card-body">
                     <div class="form-group mb-3">
                         <label>Exercise</label>
                         <select name="NewExerciseIds[0]" class="form-control">
@@ -144,8 +142,10 @@
                 </div>
             </div>
 
-            <div class="form-group mb-3">
-                <button type="button" id="add-exercise-btn" class="btn btn-success">Add Another Exercise</button>
+            <div id="new-exercises-container"></div>
+
+            <div class="form-group mb-3 mt-2">
+                <button type="button" id="add-exercise-btn" class="btn btn-info">Add Another Exercise</button>
             </div>
 
             <div id="deleted-exercises-container"></div>
@@ -162,58 +162,56 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
         $(document).ready(function() {
-            let newExerciseCount = 1;
+            let exerciseCount = 1;
 
             // Add exercise button
             $("#add-exercise-btn").click(function() {
-                const index = newExerciseCount;
-
-                const newExerciseHtml = `
-                <div class="mb-4 p-3 border rounded">
-                    <div class="form-group mb-3">
-                        <label>Exercise</label>
-                        <select name="NewExerciseIds[${index}]" class="form-control">
-                            <option value="">-- Select Exercise --</option>
-                            @foreach (var ex in exercises)
+                const html = `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="form-group mb-3">
+                            <label>Exercise</label>
+                            <select name="NewExerciseIds[${exerciseCount}]" class="form-control">
+                                <option value="">-- Select Exercise --</option>
+                                @foreach (var ex in exercises)
                 {
                     <option value="@ex.ExerciseId">@ex.Name</option>
                 }
-                        </select>
+                            </select>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label>Sets</label>
+                                    <input type="number" name="NewSets[${exerciseCount}]" min="1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label>Reps</label>
+                                    <input type="number" name="NewReps[${exerciseCount}]" min="1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label>Weight (lbs)</label>
+                                    <input type="number" name="NewWeights[${exerciseCount}]" step="0.5" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-danger remove-exercise-btn">Remove</button>
                     </div>
-                    
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group mb-3">
-                                <label>Sets</label>
-                                <input type="number" name="NewSets[${index}]" min="1" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group mb-3">
-                                <label>Reps</label>
-                                <input type="number" name="NewReps[${index}]" min="1" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group mb-3">
-                                <label>Weight (lbs)</label>
-                                <input type="number" name="NewWeights[${index}]" step="0.5" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button type="button" class="btn btn-danger remove-exercise-btn">
-                        Remove
-                    </button>
                 </div>`;
 
-                $("#new-exercises-container").append(newExerciseHtml);
-                newExerciseCount++;
+                $("#new-exercises-container").append(html);
+                exerciseCount++;
             });
 
             // Remove exercise button
             $(document).on("click", ".remove-exercise-btn", function() {
-                $(this).closest(".mb-4").remove();
+                $(this).closest(".card").remove();
             });
 
             // Delete existing exercise button
@@ -222,7 +220,7 @@
 
                 if (confirm("Are you sure you want to delete this exercise?")) {
                     $("#deleted-exercises-container").append(`<input type="hidden" name="DeletedExerciseIds" value="${exerciseId}" />`);
-                    $(this).closest(".mb-4").hide();
+                    $(this).closest(".card").hide();
                 }
             });
         });
