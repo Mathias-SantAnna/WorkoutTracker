@@ -10,19 +10,19 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+        <dt class="col-sm-3">Name</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Description)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.Description)</dd>
+        <dt class="col-sm-3">Description</dt>
+        <dd class="col-sm-9">@Model.Description</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.TargetMuscle)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.TargetMuscle)</dd>
+        <dt class="col-sm-3">Target Muscle</dt>
+        <dd class="col-sm-9">@Model.TargetMuscle</dd>
     </dl>
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="ExerciseId" />
         <input type="submit" value="Delete" class="btn btn-danger" />
-        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
     </form>
 </div>

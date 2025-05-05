@@ -20,7 +20,10 @@ namespace WorkoutTracker.Web.Controllers
         // GET: Workout
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Workouts.ToListAsync());
+            // Updated to include WorkoutExercises to show correct exercise count
+            return View(await _context.Workouts
+                .Include(w => w.WorkoutExercises)
+                .ToListAsync());
         }
 
         // GET: Workout/Details/5
@@ -47,7 +50,11 @@ namespace WorkoutTracker.Web.Controllers
         // POST: Workout/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Workout workout, int? ExerciseId, int? Sets, int? Reps, decimal? WeightLbs)
+        public async Task<IActionResult> Create(Workout workout, 
+            List<int> ExerciseIds, 
+            List<int> Sets, 
+            List<int> Reps, 
+            List<decimal?> WeightLbs)
         {
             if (ModelState.IsValid)
             {
@@ -55,19 +62,28 @@ namespace WorkoutTracker.Web.Controllers
                 _context.Add(workout);
                 await _context.SaveChangesAsync();
         
-                // If exercise details are provided, add the exercise to the workout
-                if (ExerciseId.HasValue && Sets.HasValue && Reps.HasValue)
+                // Process all submitted exercises
+                if (ExerciseIds != null)
                 {
-                    var workoutExercise = new WorkoutExercise
+                    for (int i = 0; i < ExerciseIds.Count; i++)
                     {
-                        WorkoutId = workout.WorkoutId,
-                        ExerciseId = ExerciseId.Value,
-                        Sets = Sets.Value,
-                        Reps = Reps.Value,
-                        WeightLbs = WeightLbs
-                    };
+                        // Only add if a valid exercise is selected and has sets/reps
+                        if (ExerciseIds[i] > 0 && i < Sets.Count && i < Reps.Count && 
+                            Sets[i] > 0 && Reps[i] > 0)
+                        {
+                            var workoutExercise = new WorkoutExercise
+                            {
+                                WorkoutId = workout.WorkoutId,
+                                ExerciseId = ExerciseIds[i],
+                                Sets = Sets[i],
+                                Reps = Reps[i],
+                                WeightLbs = i < WeightLbs.Count ? WeightLbs[i] : null
+                            };
+                    
+                            _context.WorkoutExercises.Add(workoutExercise);
+                        }
+                    }
             
-                    _context.WorkoutExercises.Add(workoutExercise);
                     await _context.SaveChangesAsync();
                 }
         
@@ -84,13 +100,38 @@ namespace WorkoutTracker.Web.Controllers
             var workout = await _context.Workouts.FindAsync(id);
             if (workout == null)
                 return NotFound();
+            
+            // Get all exercises for the dropdown
+            ViewBag.Exercises = await _context.Exercises.ToListAsync();
+            
+            // Get this workout's exercises
+            ViewBag.WorkoutExercises = await _context.WorkoutExercises
+                .Include(we => we.Exercise)
+                .Where(we => we.WorkoutId == id)
+                .ToListAsync();
+            
             return View(workout);
         }
 
         // POST: Workout/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Workout workout)
+        public async Task<IActionResult> Edit(
+            int id, 
+            Workout workout,
+            // Existing exercises
+            List<int> ExistingExerciseIds,
+            List<int> ExistingExerciseTypeIds,
+            List<int> ExistingSets,
+            List<int> ExistingReps,
+            List<decimal?> ExistingWeights,
+            // New exercises
+            List<int> NewExerciseIds,
+            List<int> NewSets,
+            List<int> NewReps,
+            List<decimal?> NewWeights,
+            // Deleted exercises
+            List<int> DeletedExerciseIds)
         {
             if (id != workout.WorkoutId)
             {
@@ -101,8 +142,70 @@ namespace WorkoutTracker.Web.Controllers
             {
                 try
                 {
+                    // Update workout basic info
                     _context.Update(workout);
+                    
+                    // 1. Update existing exercises
+                    if (ExistingExerciseIds != null)
+                    {
+                        for (int i = 0; i < ExistingExerciseIds.Count; i++)
+                        {
+                            // Get the workout exercise
+                            var workoutExercise = await _context.WorkoutExercises
+                                .FindAsync(ExistingExerciseIds[i]);
+                            
+                            if (workoutExercise != null)
+                            {
+                                // Update its properties
+                                workoutExercise.ExerciseId = ExistingExerciseTypeIds[i];
+                                workoutExercise.Sets = ExistingSets[i];
+                                workoutExercise.Reps = ExistingReps[i];
+                                workoutExercise.WeightLbs = i < ExistingWeights.Count ? ExistingWeights[i] : null;
+                                
+                                _context.Update(workoutExercise);
+                            }
+                        }
+                    }
+                    
+                    // 2. Delete exercises marked for deletion
+                    if (DeletedExerciseIds != null)
+                    {
+                        foreach (var exerciseId in DeletedExerciseIds)
+                        {
+                            var workoutExercise = await _context.WorkoutExercises
+                                .FindAsync(exerciseId);
+                            
+                            if (workoutExercise != null)
+                            {
+                                _context.WorkoutExercises.Remove(workoutExercise);
+                            }
+                        }
+                    }
+                    
+                    // 3. Add new exercises
+                    if (NewExerciseIds != null)
+                    {
+                        for (int i = 0; i < NewExerciseIds.Count; i++)
+                        {
+                            if (NewExerciseIds[i] > 0 && i < NewSets.Count && i < NewReps.Count &&
+                                NewSets[i] > 0 && NewReps[i] > 0)
+                            {
+                                var newExercise = new WorkoutExercise
+                                {
+                                    WorkoutId = workout.WorkoutId,
+                                    ExerciseId = NewExerciseIds[i],
+                                    Sets = NewSets[i],
+                                    Reps = NewReps[i],
+                                    WeightLbs = i < NewWeights.Count ? NewWeights[i] : null
+                                };
+                                
+                                _context.WorkoutExercises.Add(newExercise);
+                            }
+                        }
+                    }
+                    
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details), new { id = workout.WorkoutId });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -115,8 +218,15 @@ namespace WorkoutTracker.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
+            
+            // If we got this far, something failed, redisplay form
+            ViewBag.Exercises = await _context.Exercises.ToListAsync();
+            ViewBag.WorkoutExercises = await _context.WorkoutExercises
+                .Include(we => we.Exercise)
+                .Where(we => we.WorkoutId == id)
+                .ToListAsync();
+            
             return View(workout);
         }
 
@@ -160,13 +270,44 @@ namespace WorkoutTracker.Web.Controllers
         // POST: Workout/AddExercise
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddExercise(WorkoutExercise workoutExercise)
+        public async Task<IActionResult> AddExercise(WorkoutExercise workoutExercise, 
+            List<int> AdditionalExerciseIds, 
+            List<int> AdditionalSets, 
+            List<int> AdditionalReps, 
+            List<decimal?> AdditionalWeightLbs)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.WorkoutExercises.Add(workoutExercise);
+                    // Add the main exercise
+                    if (workoutExercise.ExerciseId > 0 && workoutExercise.Sets > 0 && workoutExercise.Reps > 0)
+                    {
+                        _context.WorkoutExercises.Add(workoutExercise);
+                    }
+                    
+                    // Add any additional exercises
+                    if (AdditionalExerciseIds != null && AdditionalExerciseIds.Count > 0)
+                    {
+                        for (int i = 0; i < AdditionalExerciseIds.Count; i++)
+                        {
+                            if (AdditionalExerciseIds[i] > 0 && i < AdditionalSets.Count && i < AdditionalReps.Count && 
+                                AdditionalSets[i] > 0 && AdditionalReps[i] > 0)
+                            {
+                                var additionalExercise = new WorkoutExercise
+                                {
+                                    WorkoutId = workoutExercise.WorkoutId,
+                                    ExerciseId = AdditionalExerciseIds[i],
+                                    Sets = AdditionalSets[i],
+                                    Reps = AdditionalReps[i],
+                                    WeightLbs = i < AdditionalWeightLbs.Count ? AdditionalWeightLbs[i] : null
+                                };
+                                
+                                _context.WorkoutExercises.Add(additionalExercise);
+                            }
+                        }
+                    }
+                    
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", new { id = workoutExercise.WorkoutId });
                 }

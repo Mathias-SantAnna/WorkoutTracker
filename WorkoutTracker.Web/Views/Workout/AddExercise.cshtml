@@ -15,34 +15,97 @@
         <form asp-action="AddExercise" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="WorkoutId" />
-            <div class="form-group mb-3">
-                <label class="control-label">Exercise</label>
-                <select asp-for="ExerciseId" class="form-control">
-                    <option value="">-- Select Exercise --</option>
-                    @foreach (var exercise in exercises)
-                    {
-                        <option value="@exercise.ExerciseId">@exercise.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="ExerciseId" class="text-danger"></span>
+
+            <!-- First Exercise Section -->
+            <div class="exercise-section card mb-3 p-3">
+                <div class="form-group mb-3">
+                    <label class="control-label">Exercise</label>
+                    <select asp-for="ExerciseId" class="form-control">
+                        <option value="">-- Select Exercise --</option>
+                        @foreach (var exercise in exercises)
+                        {
+                            <option value="@exercise.ExerciseId">@exercise.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="ExerciseId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Sets" class="control-label"></label>
+                    <input asp-for="Sets" class="form-control" />
+                    <span asp-validation-for="Sets" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Reps" class="control-label"></label>
+                    <input asp-for="Reps" class="form-control" />
+                    <span asp-validation-for="Reps" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="WeightLbs" class="control-label"></label>
+                    <input asp-for="WeightLbs" class="form-control" />
+                    <span asp-validation-for="WeightLbs" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group mb-3">
-                <label asp-for="Sets" class="control-label"></label>
-                <input asp-for="Sets" class="form-control" />
-                <span asp-validation-for="Sets" class="text-danger"></span>
+
+            <!-- Additional Exercise Section (initially hidden) -->
+            <div class="exercise-section card mb-3 p-3" id="exercise-2" style="display:none;">
+                <div class="form-group mb-3">
+                    <label class="control-label">Exercise</label>
+                    <select name="AdditionalExerciseIds[0]" class="form-control">
+                        <option value="">-- Select Exercise --</option>
+                        @foreach (var exercise in exercises)
+                        {
+                            <option value="@exercise.ExerciseId">@exercise.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Sets</label>
+                    <input name="AdditionalSets[0]" type="number" min="1" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Reps</label>
+                    <input name="AdditionalReps[0]" type="number" min="1" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Weight (lbs)</label>
+                    <input name="AdditionalWeightLbs[0]" type="number" step="0.5" class="form-control" />
+                </div>
+                <button type="button" class="btn btn-sm btn-danger remove-exercise">Remove</button>
             </div>
-            <div class="form-group mb-3">
-                <label asp-for="Reps" class="control-label"></label>
-                <input asp-for="Reps" class="form-control" />
-                <span asp-validation-for="Reps" class="text-danger"></span>
+
+            <!-- Third Exercise Section (initially hidden) -->
+            <div class="exercise-section card mb-3 p-3" id="exercise-3" style="display:none;">
+                <div class="form-group mb-3">
+                    <label class="control-label">Exercise</label>
+                    <select name="AdditionalExerciseIds[1]" class="form-control">
+                        <option value="">-- Select Exercise --</option>
+                        @foreach (var exercise in exercises)
+                        {
+                            <option value="@exercise.ExerciseId">@exercise.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Sets</label>
+                    <input name="AdditionalSets[1]" type="number" min="1" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Reps</label>
+                    <input name="AdditionalReps[1]" type="number" min="1" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Weight (lbs)</label>
+                    <input name="AdditionalWeightLbs[1]" type="number" step="0.5" class="form-control" />
+                </div>
+                <button type="button" class="btn btn-sm btn-danger remove-exercise">Remove</button>
             </div>
+
             <div class="form-group mb-3">
-                <label asp-for="WeightLbs" class="control-label"></label>
-                <input asp-for="WeightLbs" class="form-control" />
-                <span asp-validation-for="WeightLbs" class="text-danger"></span>
+                <button type="button" id="add-exercise" class="btn btn-outline-success">Add Another Exercise</button>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Add Exercise" class="btn btn-primary" />
+                <input type="submit" value="Add Exercise(s)" class="btn btn-primary" />
                 <a asp-action="Details" asp-route-id="@Model.WorkoutId" class="btn btn-secondary">Back to Workout</a>
             </div>
         </form>
@@ -51,4 +114,33 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function() {
+            let exerciseCount = 1;
+
+            // Add exercise button
+            $("#add-exercise").click(function() {
+                exerciseCount++;
+                if (exerciseCount <= 3) {
+                    $("#exercise-" + exerciseCount).show();
+                }
+
+                // Hide add button if we reached max
+                if (exerciseCount >= 3) {
+                    $(this).hide();
+                }
+            });
+
+            // Remove exercise button
+            $(".remove-exercise").click(function() {
+                $(this).closest(".exercise-section").hide();
+                $(this).closest(".exercise-section").find("select").val("");
+                $(this).closest(".exercise-section").find("input").val("");
+                exerciseCount--;
+
+                // Show add button again
+                $("#add-exercise").show();
+            });
+        });
+    </script>
 }
